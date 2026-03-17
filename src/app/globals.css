@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@config "../../tailwind.config.ts";
+
+@theme {
+  --color-background: rgb(12, 11, 24);
+  --color-foreground: rgb(255, 255, 255);
+}
+
+@layer base {
+  html, body {
+    @apply h-full min-h-full m-0 p-0 overflow-x-hidden;
+    font-family: 'Jost', sans-serif;
+    background: radial-gradient(ellipse at 30% 40%, #552a7a, #31205b, #151328 50%, #0c0b18 80%, #090918);
+    background-color: rgb(12, 11, 24);
+    background-attachment: fixed;
+    color: rgb(255, 255, 255);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+@layer utilities {
+  .glow-card {
+    box-shadow: 0 1px 16px 0 rgba(126, 34, 206, 0.2), 0 0 18px 1px rgba(126, 34, 206, 0.13), 0 0 48px 3px rgba(126, 34, 206, 0.07);
+    transition: box-shadow 0.3s cubic-bezier(0.4, 1, 0.3, 1);
+    border-radius: 12px;
+  }
+  
+  .glow-card:hover {
+    box-shadow: 0 2px 32px 0 rgba(126, 34, 206, 0.4), 0 0 48px 3px rgba(126, 34, 206, 0.2), 0 0 64px 6px rgba(126, 34, 206, 0.13);
+  }
+
+  .glass-bg {
+    background: linear-gradient(145deg, rgba(248, 250, 252, 0.53), rgba(226, 232, 240, 0.13) 65%, rgba(241, 245, 249, 0.73));
+    backdrop-filter: blur(11px) brightness(1.21);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
