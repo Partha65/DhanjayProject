@@ -1,37 +1,50 @@
-export default function FAQ() {
-  const faqs = [
-    {
-      q: "What payment methods do you support?",
-      a: "We support over 100+ payment methods including all major Credit/Debit Cards, NetBanking from 50+ banks, UPI (GPay, PhonePe, Paytm, etc.), and popular Wallets."
-    },
-    {
-      q: "How long does settlement take?",
-      a: "Depending on your plan, settlements can be Instant (real-time), T+0 (same day), or standard T+2 working days. We ensure your cash flow is never interrupted."
-    },
-    {
-      q: "Is SP Transaction Hub PCI-DSS compliant?",
-      a: "Absolutely. We employ bank-grade security, 256-bit encryption, and are fully PCI-DSS Level 1 compliant to ensure your and your customers' data is perfectly secure."
-    },
-    {
-      q: "Do you have checkout plugins for Shopify or WooCommerce?",
-      a: "Yes! We have plug-and-play integrations for Shopify, WooCommerce, Magento, and popular mobile frameworks like React Native and Flutter."
-    }
-  ];
+'use client';
+
+import { useState } from 'react';
+import ScrollFadeIn from '@/components/ui/ScrollFadeIn';
+import { faqData } from '@/data/faq';
+import { ChevronDown } from 'lucide-react';
+
+export default function FAQPage() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div className="container mx-auto px-4 py-20 min-h-[70vh] animate-fadeInUp">
-      <div className="max-w-3xl mx-auto">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Frequently Asked Questions</h1>
-          <p className="text-gray-400 text-lg">Everything you need to know about our payment infrastructure.</p>
-        </div>
-        
-        <div className="space-y-6">
-          {faqs.map((faq, i) => (
-            <div key={i} className="glass-bg p-6 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
-              <h3 className="text-xl font-bold mb-3">{faq.q}</h3>
-              <p className="text-gray-400 leading-relaxed">{faq.a}</p>
-            </div>
+    <div className="min-h-screen px-4 md:px-8 py-16 md:py-24">
+      <div className="max-w-4xl mx-auto">
+        <ScrollFadeIn className="text-center mb-16">
+          <div className="inline-flex items-center bg-blue-500/15 px-4 py-2 rounded-full text-sm font-medium text-blue-300 mb-6 border border-blue-500/20">
+            FAQ
+          </div>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6">
+            <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
+              Frequently Asked Questions
+            </span>
+          </h1>
+          <p className="text-gray-300 text-lg">
+            Everything you need to know about our payment solutions
+          </p>
+        </ScrollFadeIn>
+
+        <div className="space-y-4">
+          {faqData.map((faq, i) => (
+            <ScrollFadeIn key={i} delay={i * 0.05}>
+              <div className="bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 overflow-hidden hover:bg-white/10 transition-all duration-300">
+                <button
+                  className="w-full text-left p-6 focus:outline-none"
+                  onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                >
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-semibold text-white pr-4">{faq.question}</h3>
+                    <ChevronDown className={`w-5 h-5 text-purple-400 shrink-0 transition-transform duration-300 ${openIndex === i ? 'rotate-180' : ''}`} />
+                  </div>
+                </button>
+                <div className={`transition-all duration-300 ease-in-out ${openIndex === i ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
+                  <div className="px-6 pb-6">
+                    <p className="text-gray-300 leading-relaxed">{faq.answer}</p>
+                  </div>
+                </div>
+              </div>
+            </ScrollFadeIn>
           ))}
         </div>
       </div>

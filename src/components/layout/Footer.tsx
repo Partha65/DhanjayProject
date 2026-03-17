@@ -1,56 +1,101 @@
 import Link from 'next/link';
+import { Facebook, Linkedin, Instagram, Youtube, X, Mail, Phone, MapPin } from 'lucide-react';
+import { footerData } from '@/data/footer';
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-  
   return (
-    <footer className="bg-black/40 border-t border-white/5 pt-16 pb-8 relative z-10">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-16">
-          <div className="md:col-span-1 space-y-4">
-             <div className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary-500 to-secondary-500 flex items-center justify-center font-bold text-sm">
-                SP
+    <footer className="relative border-t border-white/10 mt-20">
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0b0f22]/80 to-[#0b0f22] pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+          {/* Company Info */}
+          <div className="space-y-4">
+            <Link href="/" className="flex items-center gap-2">
+              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-purple-500 via-blue-500 to-cyan-500 flex items-center justify-center">
+                <span className="text-white font-black text-xs">SP</span>
               </div>
-              <span className="font-bold text-lg">Transaction Hub</span>
+              <div className="flex flex-col leading-tight">
+                <span className="text-white font-bold text-sm">{footerData.company.name}</span>
+              </div>
+            </Link>
+            <p className="text-gray-400 text-sm leading-relaxed">{footerData.company.description}</p>
+            {/* Social icons */}
+            <div className="flex items-center gap-3 pt-2">
+              <a href="#" className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all">
+                <Facebook className="w-4 h-4" />
+              </a>
+              <a href="#" className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all">
+                <Linkedin className="w-4 h-4" />
+              </a>
+              <a href="#" className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all">
+                <Instagram className="w-4 h-4" />
+              </a>
+              <a href="#" className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all">
+                <Youtube className="w-4 h-4" />
+              </a>
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Empowering Indian businesses with reliable and instant payment gateway solutions.
-            </p>
           </div>
-          
+
+          {/* Products */}
           <div>
-            <h4 className="font-semibold mb-6">Products</h4>
-            <ul className="space-y-3 text-sm text-gray-400">
-              <li><Link href="/products" className="hover:text-primary-400 transition-colors">Payment Gateway</Link></li>
-              <li><Link href="/products" className="hover:text-primary-400 transition-colors">UPI Autopay</Link></li>
-              <li><Link href="/products" className="hover:text-primary-400 transition-colors">Payment Links</Link></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="font-semibold mb-6">Company</h4>
-            <ul className="space-y-3 text-sm text-gray-400">
-              <li><Link href="/about" className="hover:text-primary-400 transition-colors">About Us</Link></li>
-              <li><Link href="/contact-us" className="hover:text-primary-400 transition-colors">Contact</Link></li>
-              <li><Link href="/banking-patner" className="hover:text-primary-400 transition-colors">Banking Partners</Link></li>
+            <h3 className="text-white font-bold text-sm mb-4 uppercase tracking-wider">Products</h3>
+            <ul className="space-y-3">
+              {footerData.products.map((link) => (
+                <li key={link.title}>
+                  <Link href={link.href} className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
+                    {link.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
+          {/* Company */}
           <div>
-            <h4 className="font-semibold mb-6">Legal</h4>
-            <ul className="space-y-3 text-sm text-gray-400">
-              <li><Link href="/privacy-policy" className="hover:text-primary-400 transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/refund-policy" className="hover:text-primary-400 transition-colors">Refund Policy</Link></li>
-              <li><Link href="/faq" className="hover:text-primary-400 transition-colors">Terms of Service</Link></li>
+            <h3 className="text-white font-bold text-sm mb-4 uppercase tracking-wider">Company</h3>
+            <ul className="space-y-3">
+              {footerData.companyLinks.map((link) => (
+                <li key={link.title}>
+                  <Link href={link.href} className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
+                    {link.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
+
+          {/* Legal */}
+          <div>
+            <h3 className="text-white font-bold text-sm mb-4 uppercase tracking-wider">Legal</h3>
+            <ul className="space-y-3">
+              {footerData.legal.map((link) => (
+                <li key={link.title}>
+                  <Link href={link.href} className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
+                    {link.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            {/* Contact Info */}
+            <div className="mt-6 space-y-2">
+              <div className="flex items-center gap-2 text-gray-400 text-sm">
+                <Mail className="w-4 h-4 shrink-0" />
+                <span>{footerData.offices[0].email}</span>
+              </div>
+              <div className="flex items-start gap-2 text-gray-400 text-sm">
+                <MapPin className="w-4 h-4 shrink-0 mt-0.5" />
+                <span>{footerData.offices[0].address}</span>
+              </div>
+            </div>
+          </div>
         </div>
-        
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-gray-500">
-            &copy; {currentYear} SP Transaction Hub. All rights reserved.
-          </p>
+
+        {/* Bottom bar */}
+        <div className="border-t border-white/10 pt-6 text-center">
+          <p className="text-gray-500 text-xs">{footerData.copyright}</p>
         </div>
       </div>
     </footer>

@@ -1,38 +1,100 @@
-@import "tailwindcss";
-
-@config "../../tailwind.config.ts";
-
-@theme {
-  --color-background: rgb(12, 11, 24);
-  --color-foreground: rgb(255, 255, 255);
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
   html, body {
-    @apply h-full min-h-full m-0 p-0 overflow-x-hidden;
+    height: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
     font-family: 'Jost', sans-serif;
-    background: radial-gradient(ellipse at 30% 40%, #552a7a, #31205b, #151328 50%, #0c0b18 80%, #090918);
-    background-color: rgb(12, 11, 24);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: radial-gradient(
+      ellipse at 30% 40%,
+      #552a7a,
+      #31205b,
+      #151328 50%,
+      #0c0b18 80%,
+      #090918
+    );
+    background-color: #0c0b18;
     background-attachment: fixed;
-    color: rgb(255, 255, 255);
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    color: #fff;
   }
 }
 
 @layer utilities {
+  .animate-marquee {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+  }
+
+  .animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out both;
+  }
+
   .glow-card {
-    box-shadow: 0 1px 16px 0 rgba(126, 34, 206, 0.2), 0 0 18px 1px rgba(126, 34, 206, 0.13), 0 0 48px 3px rgba(126, 34, 206, 0.07);
+    box-shadow:
+      0 1px 16px 0 rgba(126, 34, 206, 0.2),
+      0 0 18px 1px rgba(126, 34, 206, 0.13),
+      0 0 48px 3px rgba(126, 34, 206, 0.07);
     transition: box-shadow 0.3s cubic-bezier(0.4, 1, 0.3, 1);
     border-radius: 12px;
   }
-  
-  .glow-card:hover {
-    box-shadow: 0 2px 32px 0 rgba(126, 34, 206, 0.4), 0 0 48px 3px rgba(126, 34, 206, 0.2), 0 0 64px 6px rgba(126, 34, 206, 0.13);
+
+  .glow-card:hover,
+  .glow-card:focus {
+    box-shadow:
+      0 2px 32px 0 rgba(126, 34, 206, 0.4),
+      0 0 48px 3px rgba(126, 34, 206, 0.2),
+      0 0 64px 6px rgba(126, 34, 206, 0.13);
+    border-color: #7e22ce;
   }
 
   .glass-bg {
-    background: linear-gradient(145deg, rgba(248, 250, 252, 0.53), rgba(226, 232, 240, 0.13) 65%, rgba(241, 245, 249, 0.73));
+    background: linear-gradient(
+      145deg,
+      rgba(248, 250, 252, 0.53),
+      rgba(226, 232, 240, 0.13) 65%,
+      rgba(241, 245, 249, 0.73)
+    );
     backdrop-filter: blur(11px) brightness(1.21);
     border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(126, 34, 206, 0.5);
+  border-radius: 2px;
+}
+
+/* Selection */
+::selection {
+  background-color: #7e22ce;
+  color: #fff;
+}
+::-moz-selection {
+  background-color: #7e22ce;
+  color: #fff;
+}
+
+/* Mobile scrollbar hidden */
+@media (max-width: 767px) {
+  ::-webkit-scrollbar {
+    display: none;
   }
 }
