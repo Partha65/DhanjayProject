@@ -1,169 +1,103 @@
 'use client';
 
 import { useState } from 'react';
+import { PageShell, PageHero } from '@/components/ui/PageShell';
 
 const sections = [
   { id: 'introduction', title: 'Introduction' },
   { id: 'info-collected', title: 'Information We Collect' },
   { id: 'how-we-use', title: 'How We Use Your Information' },
-  { id: 'data-sharing', title: 'Data Sharing' },
   { id: 'data-security', title: 'Data Security' },
   { id: 'cookies', title: 'Cookies' },
+  { id: 'third-party', title: 'Third-Party Services' },
   { id: 'your-rights', title: 'Your Rights' },
-  { id: 'changes', title: 'Changes to Policy' },
   { id: 'contact', title: 'Contact Us' },
 ];
 
 const content: Record<string, string[]> = {
   introduction: [
-    'SP Transaction Hub Technology Pvt. Ltd. ("we," "our," or "us") respects your privacy and is committed to protecting your personal data. This Privacy Policy explains how we collect, use, and safeguard your information when you use our payment gateway services.',
+    'Vertexpay Solutions Pvt. Ltd. ("we," "our," or "us") respects your privacy and is committed to protecting your personal data. This Privacy Policy explains how we collect, use, and safeguard your information when you use our payment gateway services.',
     'By using our services, you agree to the collection and use of information in accordance with this policy.',
   ],
   'info-collected': [
-    'Personal Information: Name, email address, phone number, business name, and billing address.',
-    'Financial Information: Bank account details, UPI IDs, and transaction data necessary for processing payments.',
-    'Technical Information: IP address, browser type, device information, and cookies for service optimization.',
-    'Usage Data: Information about how you interact with our platform, including pages visited and features used.',
+    'Personal Information: Name, email address, phone number, and business details provided during registration.',
+    'Financial Information: Bank account details, transaction data, and payment instrument details necessary for processing payments.',
+    'Technical Information: IP address, browser type, device information, and usage analytics collected automatically.',
+    'Communication Data: Records of correspondence when you contact our support team.',
   ],
   'how-we-use': [
     'To process and facilitate payment transactions securely.',
-    'To provide customer support and respond to your inquiries.',
-    'To improve our services, platform performance, and user experience.',
-    'To comply with legal obligations and prevent fraudulent activities.',
-    'To send you important updates about our services and policy changes.',
-  ],
-  'data-sharing': [
-    'We do not sell your personal data. We may share your information with:',
-    'Banking partners for transaction processing.',
-    'Regulatory authorities as required by law.',
-    'Service providers who assist us in operating our platform (under strict confidentiality agreements).',
+    'To verify your identity and comply with KYC/AML regulations.',
+    'To provide customer support and respond to inquiries.',
+    'To improve our services, detect fraud, and ensure platform security.',
+    'To send important service updates and notifications.',
   ],
   'data-security': [
-    'We implement industry-standard security measures including:',
-    '256-bit SSL encryption for all data transmission.',
-    'PCI DSS Level 1 compliance for payment data handling.',
-    'Regular security audits and vulnerability assessments.',
-    'Tokenization of sensitive financial data.',
+    'We implement industry-standard security measures including SSL/TLS encryption, tokenization, and PCI DSS Level 1 compliance.',
+    'All sensitive payment data is encrypted at rest and in transit using AES-256 encryption.',
+    'We conduct regular security audits and vulnerability assessments.',
   ],
   cookies: [
-    'We use cookies and similar tracking technologies to enhance your experience. You can manage cookie preferences through your browser settings.',
-    'Essential cookies: Required for basic platform functionality.',
-    'Analytics cookies: Help us understand how you use our services.',
-    'Performance cookies: Used to optimize platform performance.',
+    'We use essential cookies necessary for service functionality and security.',
+    'Analytics cookies help us understand how users interact with our platform.',
+    'You can manage cookie preferences through your browser settings.',
+  ],
+  'third-party': [
+    'We may share necessary data with banking partners, payment processors, and regulatory authorities as required.',
+    'We do not sell or rent your personal information to third parties for marketing purposes.',
   ],
   'your-rights': [
-    'Access: Request a copy of your personal data we hold.',
-    'Correction: Request correction of inaccurate data.',
-    'Deletion: Request deletion of your personal data (subject to legal obligations).',
-    'Portability: Request transfer of your data to another service provider.',
-  ],
-  changes: [
-    'We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date.',
-    'We encourage you to review this Privacy Policy periodically for any changes.',
+    'Access: You may request a copy of the personal data we hold about you.',
+    'Correction: You may request correction of inaccurate personal data.',
+    'Deletion: You may request deletion of your personal data, subject to legal retention requirements.',
+    'Portability: You may request your data in a portable format.',
   ],
   contact: [
     'If you have any questions about this Privacy Policy, please contact us at:',
-    'Email: support@sptransactionhub.com',
-    'Address: Laxmi Nagar, New Delhi, 110092',
+    'Email: vertexpaysolutionsprivatelimit@gmail.com',
+    'Address: Pl/No.-3242856, At./P.O./P.S.-Sahadevkhunta, Dist.-Balasore, Odisha-756001',
   ],
 };
 
 export default function PrivacyPolicyPage() {
   const [activeSection, setActiveSection] = useState('introduction');
 
-  const scrollTo = (id: string) => {
-    setActiveSection(id);
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
-    <div
-      className="min-h-screen"
-      style={{ backgroundColor: '#0c0b18' }}
-    >
-      <main className="max-w-6xl mx-auto px-4 py-8 md:py-12 flex flex-col md:flex-row">
+    <PageShell>
+      <PageHero tag="Legal" title="Privacy" titleGradient="Policy" />
+
+      <div className="flex flex-col lg:flex-row gap-8">
         {/* Sidebar */}
-        <aside className="md:w-1/4 md:sticky md:top-24 md:self-start mb-6 md:mb-0 md:pr-6">
-          <div
-            className="rounded-lg shadow-md p-6 md:p-8"
-            style={{
-              background: `radial-gradient(ellipse at 30% 40%, #552a7a 0%, #31205b 25%, #151328 50%, #0c0b18 80%, #090918 100%)`,
-            }}
-          >
-            <h2
-              className="text-lg font-bold mb-4"
-              style={{
-                background: 'linear-gradient(90deg, #3b82f6, #06b6d4, #3b82f6)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
-              Table of Contents
-            </h2>
-            <nav>
-              <ul className="space-y-2">
-                {sections.map((s) => (
-                  <li key={s.id}>
-                    <button
-                      onClick={() => scrollTo(s.id)}
-                      className={`w-full text-left py-1 px-2 rounded-md transition-colors duration-300 text-sm ${
-                        activeSection === s.id
-                          ? 'bg-blue-700/20 font-semibold'
-                          : 'text-white hover:bg-white/10'
-                      }`}
-                      style={
-                        activeSection === s.id
-                          ? {
-                              backgroundImage: 'linear-gradient(to right, #3b82f6, #06b6d4, #3b82f6)',
-                              WebkitBackgroundClip: 'text',
-                              WebkitTextFillColor: 'transparent',
-                            }
-                          : undefined
-                      }
-                    >
-                      {s.title}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
-        </aside>
-
-        {/* Content */}
-        <div className="md:w-3/4">
-          <div
-            className="rounded-lg shadow-md p-6 md:p-8"
-            style={{
-              background: `radial-gradient(ellipse at 30% 40%, #552a7a 0%, #31205b 25%, #151328 50%, #0c0b18 80%, #090918 100%)`,
-            }}
-          >
-            <h1
-              className="text-3xl font-bold mb-8"
-              style={{
-                background: 'linear-gradient(90deg, #3b82f6, #06b6d4, #3b82f6)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
-              Privacy Policy
-            </h1>
-
+        <nav className="lg:w-64 shrink-0">
+          <div className="glass rounded-2xl p-4 lg:sticky lg:top-28 space-y-1">
             {sections.map((s) => (
-              <section key={s.id} id={s.id} className="mb-10">
-                <h2 className="text-2xl font-semibold text-white mb-4">{s.title}</h2>
-                <div className="space-y-3">
-                  {content[s.id]?.map((paragraph, i) => (
-                    <p key={i} className="text-gray-300 leading-relaxed text-sm">
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </section>
+              <button key={s.id} onClick={() => { setActiveSection(s.id); document.getElementById(s.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}
+                className="w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-200"
+                style={{
+                  color: activeSection === s.id ? 'var(--accent-1)' : 'var(--text-secondary)',
+                  background: activeSection === s.id ? 'rgba(var(--glow-rgb), 0.08)' : 'transparent',
+                  opacity: activeSection === s.id ? 1 : 0.7,
+                }}>
+                {s.title}
+              </button>
             ))}
           </div>
+        </nav>
+
+        {/* Content */}
+        <div className="flex-1 space-y-8">
+          {sections.map((s) => (
+            <div key={s.id} id={s.id} className="glass rounded-2xl p-6 sm:p-8 scroll-mt-28">
+              <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>{s.title}</h2>
+              <div className="space-y-3">
+                {content[s.id]?.map((p, i) => (
+                  <p key={i} className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)', opacity: 0.7 }}>{p}</p>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
-      </main>
-    </div>
+      </div>
+    </PageShell>
   );
 }

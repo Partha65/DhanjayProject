@@ -2,34 +2,34 @@ export const services = [
   {
     title: 'UPI Payments',
     description: 'Accept UPI payments instantly with our secure and reliable payment gateway. Support for all UPI apps with real-time settlement.',
-    icon: 'Smartphone',
+    icon: 'Shield',
     color: 'from-blue-500 to-cyan-500',
   },
   {
     title: 'Payment Gateway',
     description: 'Complete payment gateway solution supporting cards, net banking, wallets, and UPI. Easy integration with powerful APIs.',
-    icon: 'CreditCard',
+    icon: 'Zap',
     color: 'from-purple-500 to-pink-500',
   },
   {
     title: 'Payout Solutions',
     description: 'Instant payouts to vendors, partners, and customers. Bulk transfer support with real-time tracking and reporting.',
-    icon: 'ArrowRightLeft',
+    icon: 'Globe',
     color: 'from-orange-500 to-amber-500',
   },
   {
     title: 'Smart Checkout',
     description: 'Customizable checkout experience optimized for higher conversion rates. Support for subscriptions and recurring payments.',
-    icon: 'ShoppingCart',
+    icon: 'Headphones',
     color: 'from-green-500 to-emerald-500',
   },
 ];
 
 export const integrations = [
-  { name: 'Shopify', logo: '/integrations/shopify.png' },
-  { name: 'WooCommerce', logo: '/integrations/woocommerce.png' },
-  { name: 'Wix', logo: '/integrations/wix.png' },
-  { name: 'Wordpress', logo: '/integrations/wordpress.png' },
+  { name: 'Shopify', logo: '🛍️' },
+  { name: 'WooCommerce', logo: '🛒' },
+  { name: 'Wix', logo: '🌐' },
+  { name: 'WordPress', logo: '📝' },
 ];
 
 export const stats = [
@@ -41,8 +41,8 @@ export const stats = [
 
 export const heroSlides = [
   {
-    headline: 'Payment Gateway Provider Delhi',
-    subheadline: 'Secure Online Payments',
+    headline: 'Payment Gateway Provider',
+    subtitle: 'Secure Online Payments',
     bullets: [
       'Instant UPI & Card Payments',
       'Wallets, Net Banking & EMI Support',
@@ -51,7 +51,7 @@ export const heroSlides = [
   },
   {
     headline: 'Reliable Payment Solutions',
-    subheadline: 'For Growing Businesses',
+    subtitle: 'For Growing Businesses',
     bullets: [
       'PCI DSS Compliant',
       '24/7 Technical Support',
@@ -64,7 +64,7 @@ export const ctaSection = {
   tag: '#SimplifyPayments',
   headline: 'Elevate Your Business with',
   headlineGradient: 'Secure Digital Payment Solutions',
-  description: 'Join thousands of businesses across India that trust SP Transaction Hub for fast, secure, and reliable online payment processing through our advanced payment gateway.',
+  description: 'Join thousands of businesses across India that trust Vertexpay Solutions for fast, secure, and reliable online payment processing through our advanced payment gateway.',
   checkpoints: [
     'Fast API Integration',
     '99.9% Payment Uptime',

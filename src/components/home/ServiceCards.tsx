@@ -1,47 +1,61 @@
 'use client';
 
-import { services } from '@/data/services';
-import { Smartphone, CreditCard, ArrowRightLeft, ShoppingCart } from 'lucide-react';
 import ScrollFadeIn from '@/components/ui/ScrollFadeIn';
+import { services } from '@/data/services';
+import { Shield, Zap, Globe, Headphones } from 'lucide-react';
 
 const iconMap: Record<string, React.ReactNode> = {
-  Smartphone: <Smartphone className="w-8 h-8" />,
-  CreditCard: <CreditCard className="w-8 h-8" />,
-  ArrowRightLeft: <ArrowRightLeft className="w-8 h-8" />,
-  ShoppingCart: <ShoppingCart className="w-8 h-8" />,
+  Shield: <Shield className="w-6 h-6" />,
+  Zap: <Zap className="w-6 h-6" />,
+  Globe: <Globe className="w-6 h-6" />,
+  Headphones: <Headphones className="w-6 h-6" />,
 };
 
 export default function ServiceCards() {
   return (
-    <section className="py-16 md:py-24 px-4 md:px-8">
+    <section className="relative py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <ScrollFadeIn className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4">
-            <span className="bg-gradient-to-r from-purple-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
-              Our Services
-            </span>
+        {/* Section header */}
+        <ScrollFadeIn className="text-center mb-16">
+          <p className="text-[12px] uppercase tracking-[0.25em] font-semibold mb-3" style={{ color: 'var(--accent-1)' }}>
+            Why Choose Us
+          </p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4" style={{ color: 'var(--text-primary)' }}>
+            Built for <span className="text-gradient">Scale & Speed</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Comprehensive payment solutions tailored for modern businesses
+          <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)', opacity: 0.7 }}>
+            Enterprise-grade infrastructure designed for businesses that demand reliability
           </p>
         </ScrollFadeIn>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {services.map((service, i) => (
             <ScrollFadeIn key={service.title} delay={i * 0.1}>
-              <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6 hover:bg-white/10 hover:border-white/20 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl h-full">
-                {/* Glow effect */}
-                <div className={`absolute -inset-8 bg-gradient-to-r ${service.color} opacity-0 group-hover:opacity-10 blur-3xl transition-opacity duration-500`} />
-                
+              <div className="group relative glass rounded-2xl p-6 hover:bg-white/[0.06] transition-all duration-500 hover:-translate-y-1 h-full"
+                style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
+
+                {/* Shimmer effect on hover */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 shimmer" />
+
                 <div className="relative z-10">
-                  <div className={`w-14 h-14 rounded-xl bg-gradient-to-r ${service.color} flex items-center justify-center text-white mb-5 shadow-lg group-hover:scale-110 transition-transform duration-500`}>
-                    {iconMap[service.icon]}
+                  {/* Icon */}
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110"
+                    style={{
+                      background: 'rgba(var(--glow-rgb), 0.1)',
+                      color: 'var(--accent-1)',
+                      border: '1px solid rgba(var(--glow-rgb), 0.15)',
+                    }}>
+                    {iconMap[service.icon] || <Zap className="w-6 h-6" />}
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3">{service.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">{service.description}</p>
-                  <button className="mt-4 text-sm font-semibold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 transition-colors">
-                    Learn More <span className="group-hover:translate-x-1 transition-transform">→</span>
-                  </button>
+
+                  {/* Text */}
+                  <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+                    {service.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)', opacity: 0.7 }}>
+                    {service.description}
+                  </p>
                 </div>
               </div>
             </ScrollFadeIn>

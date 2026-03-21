@@ -1,153 +1,91 @@
 'use client';
 
 import { useState } from 'react';
+import { PageShell, PageHero } from '@/components/ui/PageShell';
 
 const sections = [
   { id: 'overview', title: 'Overview' },
-  { id: 'eligibility', title: 'Refund Eligibility' },
+  { id: 'eligibility', title: 'Eligibility' },
   { id: 'process', title: 'Refund Process' },
-  { id: 'timelines', title: 'Refund Timelines' },
+  { id: 'timeline', title: 'Timeline' },
   { id: 'non-refundable', title: 'Non-Refundable Cases' },
-  { id: 'disputes', title: 'Dispute Resolution' },
   { id: 'contact', title: 'Contact Us' },
 ];
 
 const content: Record<string, string[]> = {
   overview: [
-    'SP Transaction Hub Technology Pvt. Ltd. is committed to ensuring fair and transparent refund policies for all our payment gateway users.',
+    'Vertexpay Solutions Pvt. Ltd. is committed to ensuring fair and transparent refund policies for all our payment gateway users.',
     'This policy outlines the terms and conditions under which refunds may be initiated, processed, and settled.',
   ],
   eligibility: [
-    'Duplicate Transactions: If a customer is charged multiple times for the same transaction.',
-    'Failed Transactions: If money is debited but the transaction fails and payment is not received by the merchant.',
-    'Unauthorized Transactions: Transactions made without the account holder\'s consent (subject to investigation).',
+    'Failed Transactions: If a payment is debited but the transaction fails, a refund is automatically initiated.',
+    'Duplicate Payments: Refunds for accidental duplicate charges will be processed upon verification.',
     'Merchant-Initiated Refunds: Refunds initiated by merchants for order cancellations, returns, or service issues.',
   ],
   process: [
-    'Step 1: Contact our support team at support@sptransactionhub.com with your transaction details.',
+    'Step 1: Contact our support team at vertexpaysolutionsprivatelimit@gmail.com with your transaction details.',
     'Step 2: Our team will investigate and verify the refund eligibility within 24-48 hours.',
     'Step 3: Once approved, the refund will be processed to the original payment method.',
     'Step 4: You will receive a confirmation email with the refund reference number.',
   ],
-  timelines: [
-    'UPI Transactions: 1-3 business days',
-    'Credit/Debit Card: 5-7 business days',
-    'Net Banking: 3-5 business days',
+  timeline: [
+    'UPI Refunds: 1-3 business days',
+    'Credit/Debit Card Refunds: 5-7 business days',
+    'Net Banking Refunds: 5-10 business days',
     'Wallet Refunds: 1-2 business days',
-    'Note: Timelines may vary depending on the issuing bank and payment method.',
+    'Note: The exact timeline may vary depending on the issuing bank or payment provider.',
   ],
   'non-refundable': [
-    'Service charges and processing fees already incurred.',
-    'Transactions older than 180 days from the date of the transaction.',
-    'Cases involving fraudulent activity by the claimant.',
-    'Transactions where the service/product has been delivered and consumed as agreed.',
-  ],
-  disputes: [
-    'If you disagree with a refund decision, you may escalate the matter by contacting our grievance officer.',
-    'All disputes will be resolved in accordance with the applicable Indian laws and regulations.',
-    'The decision of the grievance officer shall be final and binding unless overridden by a competent legal authority.',
+    'Transactions flagged for fraud or suspicious activity.',
+    'Services already rendered or consumed in full.',
+    'Refund requests made after 180 days from the transaction date.',
+    'Chargebacks initiated directly with the card issuer.',
   ],
   contact: [
     'For refund-related queries, please contact us at:',
-    'Email: support@sptransactionhub.com',
-    'Phone: +91 XXXXXXXXXX',
-    'Address: Laxmi Nagar, New Delhi, 110092',
+    'Email: vertexpaysolutionsprivatelimit@gmail.com',
+    'Phone: +918079739587',
+    'Address: Pl/No.-3242856, At./P.O./P.S.-Sahadevkhunta, Dist.-Balasore, Odisha-756001',
   ],
 };
 
 export default function RefundPolicyPage() {
   const [activeSection, setActiveSection] = useState('overview');
 
-  const scrollTo = (id: string) => {
-    setActiveSection(id);
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#0c0b18' }}>
-      <main className="max-w-6xl mx-auto px-4 py-8 md:py-12 flex flex-col md:flex-row">
-        {/* Sidebar */}
-        <aside className="md:w-1/4 md:sticky md:top-24 md:self-start mb-6 md:mb-0 md:pr-6">
-          <div
-            className="rounded-lg shadow-md p-6 md:p-8"
-            style={{
-              background: `radial-gradient(ellipse at 30% 40%, #552a7a 0%, #31205b 25%, #151328 50%, #0c0b18 80%, #090918 100%)`,
-            }}
-          >
-            <h2
-              className="text-lg font-bold mb-4"
-              style={{
-                background: 'linear-gradient(90deg, #3b82f6, #06b6d4, #3b82f6)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
-              Table of Contents
-            </h2>
-            <nav>
-              <ul className="space-y-2">
-                {sections.map((s) => (
-                  <li key={s.id}>
-                    <button
-                      onClick={() => scrollTo(s.id)}
-                      className={`w-full text-left py-1 px-2 rounded-md transition-colors duration-300 text-sm ${
-                        activeSection === s.id
-                          ? 'bg-blue-700/20 font-semibold'
-                          : 'text-white hover:bg-white/10'
-                      }`}
-                      style={
-                        activeSection === s.id
-                          ? {
-                              backgroundImage: 'linear-gradient(to right, #3b82f6, #06b6d4, #3b82f6)',
-                              WebkitBackgroundClip: 'text',
-                              WebkitTextFillColor: 'transparent',
-                            }
-                          : undefined
-                      }
-                    >
-                      {s.title}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
-        </aside>
+    <PageShell>
+      <PageHero tag="Legal" title="Refund" titleGradient="Policy" />
 
-        {/* Content */}
-        <div className="md:w-3/4">
-          <div
-            className="rounded-lg shadow-md p-6 md:p-8"
-            style={{
-              background: `radial-gradient(ellipse at 30% 40%, #552a7a 0%, #31205b 25%, #151328 50%, #0c0b18 80%, #090918 100%)`,
-            }}
-          >
-            <h1
-              className="text-3xl font-bold mb-8"
-              style={{
-                background: 'linear-gradient(90deg, #3b82f6, #06b6d4, #3b82f6)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
-              Refund Policy
-            </h1>
-
+      <div className="flex flex-col lg:flex-row gap-8">
+        <nav className="lg:w-64 shrink-0">
+          <div className="glass rounded-2xl p-4 lg:sticky lg:top-28 space-y-1">
             {sections.map((s) => (
-              <section key={s.id} id={s.id} className="mb-10">
-                <h2 className="text-2xl font-semibold text-white mb-4">{s.title}</h2>
-                <div className="space-y-3">
-                  {content[s.id]?.map((paragraph, i) => (
-                    <p key={i} className="text-gray-300 leading-relaxed text-sm">
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </section>
+              <button key={s.id} onClick={() => { setActiveSection(s.id); document.getElementById(s.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}
+                className="w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-200"
+                style={{
+                  color: activeSection === s.id ? 'var(--accent-1)' : 'var(--text-secondary)',
+                  background: activeSection === s.id ? 'rgba(var(--glow-rgb), 0.08)' : 'transparent',
+                  opacity: activeSection === s.id ? 1 : 0.7,
+                }}>
+                {s.title}
+              </button>
             ))}
           </div>
+        </nav>
+
+        <div className="flex-1 space-y-8">
+          {sections.map((s) => (
+            <div key={s.id} id={s.id} className="glass rounded-2xl p-6 sm:p-8 scroll-mt-28">
+              <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>{s.title}</h2>
+              <div className="space-y-3">
+                {content[s.id]?.map((p, i) => (
+                  <p key={i} className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)', opacity: 0.7 }}>{p}</p>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
-      </main>
-    </div>
+      </div>
+    </PageShell>
   );
 }

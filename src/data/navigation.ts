@@ -1,5 +1,5 @@
 export const topBarData = {
-  supportEmail: 'support@sptransactionhub.com',
+  supportEmail: 'vertexpaysolutionsprivatelimit@gmail.com',
   ticker: [
     '📱 Mobile App – Coming Soon ✨',
     '🔊 Sound Box – Coming Soon 🔥',

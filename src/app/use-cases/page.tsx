@@ -1,43 +1,37 @@
 'use client';
 
+import { PageShell, PageHero, GlassCard } from '@/components/ui/PageShell';
 import ScrollFadeIn from '@/components/ui/ScrollFadeIn';
+import { ShoppingCart, HeartPulse, GraduationCap, Plane, Store, Landmark } from 'lucide-react';
 
 const useCases = [
-  { title: 'E-Commerce', description: 'Seamless checkout for online stores with multi-payment support and quick settlement.', icon: '🛒', gradient: 'from-blue-500/20 to-cyan-500/20', border: 'border-blue-500/20' },
-  { title: 'Healthcare', description: 'Secure patient payment solutions with EMI options and insurance integration.', icon: '🏥', gradient: 'from-green-500/20 to-emerald-500/20', border: 'border-green-500/20' },
-  { title: 'Education', description: 'Fee collection platforms with recurring billing and parent notification systems.', icon: '📚', gradient: 'from-purple-500/20 to-indigo-500/20', border: 'border-purple-500/20' },
-  { title: 'Travel & Hospitality', description: 'Booking payments with multi-currency support and instant confirmations.', icon: '✈️', gradient: 'from-orange-500/20 to-amber-500/20', border: 'border-orange-500/20' },
-  { title: 'Retail & POS', description: 'Offline and online payment acceptance with QR codes and sound box integration.', icon: '🏪', gradient: 'from-pink-500/20 to-rose-500/20', border: 'border-pink-500/20' },
-  { title: 'Financial Services', description: 'Fintech solutions with advanced payout APIs and real-time reconciliation.', icon: '🏦', gradient: 'from-indigo-500/20 to-blue-500/20', border: 'border-indigo-500/20' },
+  { icon: <ShoppingCart className="w-6 h-6" />, title: 'E-Commerce', desc: 'Seamless checkout for online stores with cart recovery, multi-currency, and subscription billing.' },
+  { icon: <HeartPulse className="w-6 h-6" />, title: 'Healthcare', desc: 'Secure payment solutions for hospitals, clinics, and telemedicine platforms with HIPAA-compliant processing.' },
+  { icon: <GraduationCap className="w-6 h-6" />, title: 'Education', desc: 'Fee collection automation for schools, universities, and ed-tech platforms with scheduled payments.' },
+  { icon: <Plane className="w-6 h-6" />, title: 'Travel & Hospitality', desc: 'Multi-currency payments with instant refunds and booking management integration.' },
+  { icon: <Store className="w-6 h-6" />, title: 'Retail', desc: 'Omni-channel payment solutions with QR payments, POS integration, and inventory sync.' },
+  { icon: <Landmark className="w-6 h-6" />, title: 'Financial Services', desc: 'Compliant payment infrastructure for lending, insurance, and investment platforms.' },
 ];
 
 export default function UseCasesPage() {
   return (
-    <div className="min-h-screen px-4 md:px-8 py-16 md:py-24">
-      <div className="max-w-7xl mx-auto">
-        <ScrollFadeIn className="text-center mb-16">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6">
-            <span className="bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
-              Use Cases
-            </span>
-          </h1>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            Tailored payment solutions for every industry
-          </p>
-        </ScrollFadeIn>
+    <PageShell>
+      <PageHero tag="Use Cases" title="Payment Solutions for" titleGradient="Every Industry" description="Tailored integrations for businesses across sectors." />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {useCases.map((uc, i) => (
-            <ScrollFadeIn key={uc.title} delay={i * 0.1}>
-              <div className={`group bg-gradient-to-br ${uc.gradient} backdrop-blur-md p-6 rounded-2xl border ${uc.border} hover:border-opacity-60 transition-all duration-500 hover:scale-105 hover:shadow-xl h-full`}>
-                <div className="text-4xl mb-4 text-center">{uc.icon}</div>
-                <h3 className="text-xl font-bold text-white mb-3 text-center">{uc.title}</h3>
-                <p className="text-gray-300 text-center leading-relaxed text-sm">{uc.description}</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {useCases.map((uc, i) => (
+          <ScrollFadeIn key={uc.title} delay={i * 0.08}>
+            <GlassCard className="h-full">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                style={{ background: 'rgba(var(--glow-rgb), 0.1)', color: 'var(--accent-1)' }}>
+                {uc.icon}
               </div>
-            </ScrollFadeIn>
-          ))}
-        </div>
+              <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>{uc.title}</h3>
+              <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)', opacity: 0.7 }}>{uc.desc}</p>
+            </GlassCard>
+          </ScrollFadeIn>
+        ))}
       </div>
-    </div>
+    </PageShell>
   );
 }

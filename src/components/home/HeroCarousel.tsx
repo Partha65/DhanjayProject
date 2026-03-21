@@ -1,96 +1,188 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { heroSlides } from '@/data/services';
-import { CheckCircle } from 'lucide-react';
+import { ArrowRight, Shield, Clock, Headphones } from 'lucide-react';
 import Link from 'next/link';
+
+const trustBadges = [
+  { icon: <Shield className="w-4 h-4" />, label: 'PCI DSS Certified' },
+  { icon: <Clock className="w-4 h-4" />, label: '99.9% Uptime' },
+  { icon: <Headphones className="w-4 h-4" />, label: '24/7 Support' },
+];
 
 export default function HeroCarousel() {
   const [current, setCurrent] = useState(0);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
-    return () => clearInterval(timer);
+  const next = useCallback(() => {
+    setCurrent((prev) => (prev + 1) % heroSlides.length);
   }, []);
+
+  useEffect(() => {
+    const id = setInterval(next, 5000);
+    return () => clearInterval(id);
+  }, [next]);
 
   const slide = heroSlides[current];
 
   return (
-    <section className="relative min-h-[80svh] flex items-center overflow-hidden">
-      {/* Background image: circuit-board aesthetic */}
-      <div className="absolute inset-0 z-0">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-30"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1920&q=80')`,
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0c0b18]/70 to-[#0c0b18]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0c0b18]/80 via-transparent to-[#0c0b18]/50" />
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+      {/* Ambient glows */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full opacity-20"
+          style={{ background: 'radial-gradient(circle, var(--accent-1), transparent 70%)', filter: 'blur(80px)', animation: 'float 8s ease-in-out infinite' }} />
+        <div className="absolute -bottom-48 -right-48 w-[600px] h-[600px] rounded-full opacity-15"
+          style={{ background: 'radial-gradient(circle, var(--accent-2), transparent 70%)', filter: 'blur(100px)', animation: 'float 10s ease-in-out infinite reverse' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full opacity-10"
+          style={{ background: 'radial-gradient(circle, var(--accent-3), transparent 70%)', filter: 'blur(60px)', animation: 'float 6s ease-in-out infinite' }} />
       </div>
 
-      {/* Animated aurora blobs */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute top-40 right-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-      <div className="absolute bottom-20 left-1/3 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+      {/* Grid pattern */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-24 w-full">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={current}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="max-w-3xl"
-          >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] mb-4">
-              <span className="bg-gradient-to-r from-purple-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                {slide.headline}
-              </span>
-            </h1>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white/90 mb-6">
-              {slide.subheadline}
-            </h2>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-            {/* Bullet points */}
-            <div className="space-y-3 mb-8">
-              {slide.bullets.map((bullet, i) => (
-                <motion.div
-                  key={bullet}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3 + i * 0.15 }}
-                  className="flex items-center gap-3"
-                >
-                  <CheckCircle className="w-5 h-5 text-cyan-400 shrink-0" />
-                  <span className="text-gray-300 text-lg">{bullet}</span>
-                </motion.div>
-              ))}
+          {/* Left — Text */}
+          <div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+              >
+                {/* Tag */}
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[12px] font-semibold tracking-wide mb-6"
+                  style={{ background: 'rgba(var(--glow-rgb), 0.1)', color: 'var(--accent-1)', border: '1px solid rgba(var(--glow-rgb), 0.15)' }}>
+                  <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--accent-1)' }} />
+                  PAYMENT GATEWAY
+                </div>
+
+                {/* Headline */}
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6">
+                  <span style={{ color: 'var(--text-primary)' }}>{slide.headline.split(' ').slice(0, 2).join(' ')}</span>
+                  <br />
+                  <span className="text-gradient">{slide.headline.split(' ').slice(2).join(' ')}</span>
+                </h1>
+
+                {/* Subtitle */}
+                <p className="text-lg mb-8 max-w-lg leading-relaxed" style={{ color: 'var(--text-secondary)', opacity: 0.8 }}>
+                  {slide.subtitle}
+                </p>
+
+                {/* Bullets */}
+                <div className="flex flex-wrap gap-3 mb-10">
+                  {slide.bullets.map((b) => (
+                    <div key={b} className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[13px] font-medium"
+                      style={{ background: 'rgba(255,255,255,0.04)', color: 'var(--text-secondary)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                      <span className="w-1 h-1 rounded-full" style={{ background: 'var(--accent-1)' }} />
+                      {b}
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA */}
+                <div className="flex flex-wrap gap-4">
+                  <Link href="/contact-us"
+                    className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-sm font-bold text-white transition-all duration-300 hover:shadow-2xl hover:-translate-y-0.5"
+                    style={{ background: 'var(--gradient-button)', boxShadow: '0 8px 30px rgba(var(--glow-rgb), 0.3)' }}>
+                    Get Started
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                  <Link href="/products"
+                    className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-sm font-bold transition-all duration-300 hover:bg-white/[0.06]"
+                    style={{ color: 'var(--text-secondary)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                    Explore Products
+                  </Link>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Right — Dashboard visual */}
+          <div className="hidden lg:block relative">
+            <div className="relative">
+              {/* Main card */}
+              <div className="glass rounded-3xl p-8 relative overflow-hidden"
+                style={{ boxShadow: '0 32px 80px rgba(0,0,0,0.4), 0 0 40px rgba(var(--glow-rgb), 0.06)' }}>
+                <div className="shimmer absolute inset-0 rounded-3xl" />
+
+                {/* Mock dashboard */}
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-6">
+                    <div>
+                      <p className="text-[11px] uppercase tracking-widest font-medium" style={{ color: 'var(--text-muted)', opacity: 0.6 }}>Total Revenue</p>
+                      <p className="text-3xl font-extrabold" style={{ color: 'var(--text-primary)' }}>₹12,48,350</p>
+                    </div>
+                    <div className="px-3 py-1 rounded-full text-[11px] font-bold" style={{ background: 'rgba(var(--glow-rgb), 0.15)', color: 'var(--accent-1)' }}>
+                      +24.5%
+                    </div>
+                  </div>
+
+                  {/* Chart bars */}
+                  <div className="flex items-end gap-2 h-32 mb-6">
+                    {[40, 65, 45, 80, 55, 90, 70, 85, 60, 95, 75, 88].map((h, i) => (
+                      <div key={i} className="flex-1 rounded-t-md transition-all duration-500"
+                        style={{
+                          height: `${h}%`,
+                          background: i === 9 ? 'var(--gradient-button)' : 'rgba(var(--glow-rgb), 0.15)',
+                          animationDelay: `${i * 100}ms`,
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Stats row */}
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      { label: 'Transactions', value: '14,230' },
+                      { label: 'Success Rate', value: '99.7%' },
+                      { label: 'Avg. Time', value: '0.8s' },
+                    ].map((s) => (
+                      <div key={s.label} className="text-center p-3 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)' }}>
+                        <p className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>{s.value}</p>
+                        <p className="text-[10px] uppercase tracking-wider" style={{ color: 'var(--text-muted)', opacity: 0.5 }}>{s.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating badge */}
+              <div className="absolute -top-4 -right-4 px-4 py-2 rounded-xl text-[11px] font-bold glass"
+                style={{ color: 'var(--accent-1)', boxShadow: '0 8px 24px rgba(0,0,0,0.3)', animation: 'float 4s ease-in-out infinite' }}>
+                🔒 PCI DSS Level 1
+              </div>
             </div>
+          </div>
+        </div>
 
-            {/* CTA */}
-            <Link
-              href="/contact-us"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 text-lg"
-            >
-              Get Started
-              <span className="text-xl">→</span>
-            </Link>
-          </motion.div>
-        </AnimatePresence>
+        {/* Trust badges */}
+        <div className="flex flex-wrap justify-center gap-6 mt-16 pt-10" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+          {trustBadges.map((badge) => (
+            <div key={badge.label} className="flex items-center gap-2 text-[12px] font-medium" style={{ color: 'var(--text-muted)', opacity: 0.5 }}>
+              {badge.icon}
+              {badge.label}
+            </div>
+          ))}
+        </div>
 
         {/* Slide indicators */}
-        <div className="flex gap-2 mt-8">
+        <div className="flex justify-center gap-2 mt-8">
           {heroSlides.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrent(i)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${i === current ? 'bg-cyan-400 w-8' : 'bg-white/30'}`}
+              className="transition-all duration-300 rounded-full"
+              style={{
+                width: i === current ? '24px' : '6px',
+                height: '6px',
+                background: i === current ? 'var(--accent-1)' : 'rgba(255,255,255,0.15)',
+              }}
             />
           ))}
         </div>

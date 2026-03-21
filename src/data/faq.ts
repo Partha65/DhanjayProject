@@ -1,7 +1,7 @@
 export const faqData = [
   {
-    question: 'What is SP Transaction Hub?',
-    answer: 'SP Transaction Hub is a secure and reliable payment gateway provider based in Delhi, offering comprehensive digital payment solutions including UPI payments, card processing, net banking, and payout services for businesses across India.',
+    question: 'What is Vertexpay Solutions?',
+    answer: 'Vertexpay Solutions is a secure and reliable payment gateway provider, offering comprehensive digital payment solutions including UPI payments, card processing, net banking, and payout services for businesses across India.',
   },
   {
     question: 'How can I integrate the payment gateway?',
@@ -21,7 +21,7 @@ export const faqData = [
   },
   {
     question: 'Do you provide technical support?',
-    answer: 'Yes, we provide 24/7 technical support via email, phone, and dedicated account managers for enterprise clients. Our support team is based in Delhi and Mumbai.',
+    answer: 'Yes, we provide 24/7 technical support via email, phone, and dedicated account managers for enterprise clients.',
   },
   {
     question: 'What are the pricing plans?',

@@ -1,49 +1,49 @@
 'use client';
 
 import ScrollFadeIn from '@/components/ui/ScrollFadeIn';
-
-const integrations = [
-  { name: 'Shopify', color: 'text-green-400' },
-  { name: 'WooCommerce', color: 'text-purple-400' },
-  { name: 'Wix', color: 'text-blue-400' },
-  { name: 'Wordpress', color: 'text-cyan-400' },
-];
+import { integrations } from '@/data/services';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 export default function IntegrationLogos() {
   return (
-    <section className="py-16 md:py-20 px-4 md:px-8">
-      <div className="max-w-6xl mx-auto">
-        <ScrollFadeIn className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-extrabold mb-4">
-            <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-              Easy Platform Integration
-            </span>
+    <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <ScrollFadeIn className="text-center mb-14">
+          <p className="text-[12px] uppercase tracking-[0.25em] font-semibold mb-3" style={{ color: 'var(--accent-1)' }}>
+            Integrations
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-extrabold mb-4" style={{ color: 'var(--text-primary)' }}>
+            Works With Your <span className="text-gradient">Stack</span>
           </h2>
-          <p className="text-gray-400 text-lg">Integrate with your favorite platforms in minutes</p>
+          <p className="max-w-lg mx-auto text-base" style={{ color: 'var(--text-secondary)', opacity: 0.7 }}>
+            Plug into your existing platform in minutes
+          </p>
         </ScrollFadeIn>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {integrations.map((platform, i) => (
-            <ScrollFadeIn key={platform.name} delay={i * 0.1}>
-              <div className="group relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 text-center hover:bg-white/10 hover:border-white/20 transition-all duration-500 hover:-translate-y-2">
-                {/* Placeholder for logo */}
-                <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-white/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <span className={`text-2xl font-black ${platform.color}`}>{platform.name[0]}</span>
-                </div>
-                <h3 className={`font-bold ${platform.color} mb-3`}>{platform.name}</h3>
-                <button className="px-4 py-2 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 text-white text-xs font-bold hover:from-orange-600 hover:to-amber-600 transition-all shadow-lg">
-                  Click for Integration Setup
-                </button>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+          {integrations.map((integration, i) => (
+            <ScrollFadeIn key={integration.name} delay={i * 0.1}>
+              <div className="group glass rounded-2xl p-6 text-center hover:bg-white/[0.06] transition-all duration-500 hover:-translate-y-1">
+                <div className="text-4xl mb-3">{integration.logo}</div>
+                <p className="text-sm font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>{integration.name}</p>
+                <Link href="#"
+                  className="inline-flex items-center gap-1 text-[11px] font-semibold px-3 py-1.5 rounded-lg transition-all duration-300 hover:opacity-80"
+                  style={{ color: 'var(--accent-1)', background: 'rgba(var(--glow-rgb), 0.1)', border: '1px solid rgba(var(--glow-rgb), 0.12)' }}>
+                  Setup <ArrowRight className="w-3 h-3" />
+                </Link>
               </div>
             </ScrollFadeIn>
           ))}
         </div>
 
-        <div className="text-center mt-8">
-          <button className="px-6 py-3 rounded-full border border-orange-500/50 text-orange-400 font-semibold text-sm hover:bg-orange-500/10 transition-all">
-            View All ↓
-          </button>
-        </div>
+        <ScrollFadeIn className="text-center">
+          <Link href="/products"
+            className="inline-flex items-center gap-2 text-sm font-semibold transition-all duration-300 hover:gap-3"
+            style={{ color: 'var(--accent-1)' }}>
+            View All Integrations <ArrowRight className="w-4 h-4" />
+          </Link>
+        </ScrollFadeIn>
       </div>
     </section>
   );

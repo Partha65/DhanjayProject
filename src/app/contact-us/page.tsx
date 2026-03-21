@@ -1,155 +1,100 @@
 'use client';
 
 import { useState } from 'react';
+import { PageShell, PageHero, GlassCard } from '@/components/ui/PageShell';
 import ScrollFadeIn from '@/components/ui/ScrollFadeIn';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Loader2, CheckCircle } from 'lucide-react';
+
+const contactInfo = [
+  { icon: <Mail className="w-5 h-5" />, title: 'Email Us', value: 'vertexpaysolutionsprivatelimit@gmail.com' },
+  { icon: <Phone className="w-5 h-5" />, title: 'Call Us', value: '+918079739587' },
+  { icon: <MapPin className="w-5 h-5" />, title: 'Visit Us', value: 'Pl/No.-3242856, At./P.O./P.S.-Sahadevkhunta, Dist.-Balasore, Odisha-756001' },
+];
 
 export default function ContactPage() {
   const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [sent, setSent] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 1500);
+    setTimeout(() => { setLoading(false); setSent(true); }, 1500);
   };
 
   return (
-    <div className="min-h-screen px-4 md:px-8 py-16 md:py-24">
-      <div className="max-w-7xl mx-auto">
-        <ScrollFadeIn className="text-center mb-16">
-          <div className="inline-flex items-center bg-orange-500/15 px-4 py-2 rounded-full text-sm font-medium text-orange-300 mb-6 border border-orange-500/20">
-            Get in Touch
-          </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6">
-            <span className="bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
-              Contact Us
-            </span>
-          </h1>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            Have questions? Our team is here to help. Reach out to us for inquiries, support, or partnership opportunities.
-          </p>
+    <PageShell>
+      <PageHero tag="Contact" title="Get in" titleGradient="Touch" description="Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible." />
+
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+        {/* Form */}
+        <ScrollFadeIn className="lg:col-span-3">
+          <GlassCard hover={false} className="p-8">
+            {sent ? (
+              <div className="text-center py-12">
+                <CheckCircle className="w-16 h-16 mx-auto mb-4" style={{ color: 'var(--accent-1)' }} />
+                <h3 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Message Sent!</h3>
+                <p className="text-sm" style={{ color: 'var(--text-secondary)', opacity: 0.7 }}>We&apos;ll get back to you within 24 hours.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <input type="text" required placeholder="Full Name"
+                    className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all focus:ring-1"
+                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)', color: 'var(--text-primary)', ['--tw-ring-color' as string]: 'var(--accent-1)' }} />
+                  <input type="email" required placeholder="Email Address"
+                    className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all focus:ring-1"
+                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)', color: 'var(--text-primary)' }} />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <input type="tel" placeholder="Phone Number"
+                    className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all focus:ring-1"
+                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)', color: 'var(--text-primary)' }} />
+                  <input type="text" placeholder="Business Name"
+                    className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all focus:ring-1"
+                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)', color: 'var(--text-primary)' }} />
+                </div>
+                <textarea required rows={5} placeholder="Your Message"
+                  className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all resize-none focus:ring-1"
+                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)', color: 'var(--text-primary)' }} />
+                <button type="submit" disabled={loading}
+                  className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3 rounded-xl text-sm font-semibold text-white transition-all hover:-translate-y-0.5"
+                  style={{ background: 'var(--gradient-button)', boxShadow: '0 4px 20px rgba(var(--glow-rgb), 0.2)' }}>
+                  {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                  {loading ? 'Sending...' : 'Send Message'}
+                </button>
+              </form>
+            )}
+          </GlassCard>
         </ScrollFadeIn>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
-          {/* Contact Form */}
-          <ScrollFadeIn>
-            <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-8">
-              <h2 className="text-2xl font-bold text-white mb-6">Send us a Message</h2>
-              {submitted ? (
-                <div className="text-center py-12">
-                  <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
-                    <Send className="w-8 h-8 text-green-400" />
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-2">Message Sent!</h3>
-                  <p className="text-gray-400">Thank you for contacting us. We&apos;ll get back to you soon.</p>
+        {/* Info + Map */}
+        <div className="lg:col-span-2 space-y-5">
+          {contactInfo.map((info, i) => (
+            <ScrollFadeIn key={info.title} delay={i * 0.1}>
+              <GlassCard className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
+                  style={{ background: 'rgba(var(--glow-rgb), 0.1)', color: 'var(--accent-1)' }}>
+                  {info.icon}
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm text-gray-400 mb-1.5 font-medium">Full Name</label>
-                      <input type="text" required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/50 transition-colors text-sm" placeholder="Your name" />
-                    </div>
-                    <div>
-                      <label className="block text-sm text-gray-400 mb-1.5 font-medium">Email</label>
-                      <input type="email" required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/50 transition-colors text-sm" placeholder="you@example.com" />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-sm text-gray-400 mb-1.5 font-medium">Phone Number</label>
-                    <input type="tel" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/50 transition-colors text-sm" placeholder="+91 XXXXXXXXXX" />
-                  </div>
-                  <div>
-                    <label className="block text-sm text-gray-400 mb-1.5 font-medium">Business Name</label>
-                    <input type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/50 transition-colors text-sm" placeholder="Your business name" />
-                  </div>
-                  <div>
-                    <label className="block text-sm text-gray-400 mb-1.5 font-medium">Message</label>
-                    <textarea required rows={4} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/50 transition-colors text-sm resize-none" placeholder="Tell us about your requirements..." />
-                  </div>
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className={`w-full py-3 rounded-xl font-bold text-white transition-all duration-300 text-sm ${loading ? 'bg-gray-600 cursor-not-allowed' : 'bg-gradient-to-r from-orange-500 to-purple-600 hover:from-orange-600 hover:to-purple-700 shadow-xl hover:shadow-2xl'}`}
-                  >
-                    {loading ? (
-                      <span className="flex items-center justify-center gap-2">
-                        <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" /></svg>
-                        Sending...
-                      </span>
-                    ) : 'Send Message'}
-                  </button>
-                </form>
-              )}
-            </div>
-          </ScrollFadeIn>
+                <div>
+                  <h3 className="text-sm font-bold mb-0.5" style={{ color: 'var(--text-primary)' }}>{info.title}</h3>
+                  <p className="text-[13px] break-all" style={{ color: 'var(--text-secondary)', opacity: 0.7 }}>{info.value}</p>
+                </div>
+              </GlassCard>
+            </ScrollFadeIn>
+          ))}
 
-          {/* Contact Info */}
-          <ScrollFadeIn delay={0.2}>
-            <div className="space-y-6">
-              <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6 hover:bg-white/10 transition-all duration-300">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center text-white">
-                    <Mail className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-white font-bold">Email Us</h3>
-                    <p className="text-gray-400 text-sm">support@sptransactionhub.com</p>
-                  </div>
-                </div>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6 hover:bg-white/10 transition-all duration-300">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white">
-                    <Phone className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-white font-bold">Call Us</h3>
-                    <p className="text-gray-400 text-sm">+91 XXXXXXXXXX</p>
-                  </div>
-                </div>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6 hover:bg-white/10 transition-all duration-300">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 flex items-center justify-center text-white">
-                    <MapPin className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-white font-bold">Head Office</h3>
-                    <p className="text-gray-400 text-sm">Laxmi Nagar, New Delhi, 110092</p>
-                  </div>
-                </div>
-              </div>
+          <ScrollFadeIn delay={0.3}>
+            <div className="glass rounded-2xl overflow-hidden" style={{ height: '220px' }}>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3712.0277154660707!2d86.91659397514282!3d21.506634330265054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a1cf5983ec8ddf5%3A0x3a571da657a74a6e!2sSahadevkhuntha%2C%20Railway%20Colony%2C%20Balia%2C%20Balasore%2C%20Odisha!5e0!3m2!1sen!2sin!4v1774088813226!5m2!1sen!2sin"
+                width="100%" height="100%" allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+                title="Vertexpay Solutions Location" style={{ border: 0, filter: 'invert(0.9) hue-rotate(180deg) brightness(0.8) contrast(1.2)' }}
+              />
             </div>
           </ScrollFadeIn>
         </div>
-
-        {/* Google Maps */}
-        <ScrollFadeIn>
-          <div className="rounded-2xl bg-gradient-to-tr from-[#25204b]/90 to-[#ff8f56]/60 shadow-xl overflow-hidden">
-            <div className="p-8 pb-6">
-              <h2 className="text-3xl font-bold text-white text-center mb-2">Find Us Here</h2>
-              <p className="text-gray-200 text-center">Visit our Head Office in Laxmi Nagar, New Delhi</p>
-            </div>
-            <div className="mx-8 mb-8 rounded-xl overflow-hidden ring-4 ring-white/20 shadow-2xl">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.5!2d77.28!3d28.63!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDM3JzQ4LjAiTiA3N8KwMTYnNDguMCJF!5e0!3m2!1sen!2sin!4v1234567890"
-                width="100%"
-                height="400"
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="SP Transaction Hub Location"
-                style={{ border: 0 }}
-              />
-            </div>
-          </div>
-        </ScrollFadeIn>
       </div>
-    </div>
+    </PageShell>
   );
 }

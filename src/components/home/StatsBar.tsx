@@ -1,33 +1,30 @@
 'use client';
 
-import { stats } from '@/data/services';
 import ScrollFadeIn from '@/components/ui/ScrollFadeIn';
+import { stats } from '@/data/services';
 
 export default function StatsBar() {
   return (
-    <section className="py-16 md:py-20 px-4 md:px-8">
-      <div className="max-w-6xl mx-auto">
-        <ScrollFadeIn className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
-            Trusted by <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">10,000+</span> Businesses
+    <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <ScrollFadeIn className="text-center mb-14">
+          <p className="text-[12px] uppercase tracking-[0.25em] font-semibold mb-3" style={{ color: 'var(--accent-1)' }}>
+            Trusted Worldwide
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-extrabold" style={{ color: 'var(--text-primary)' }}>
+            Numbers That <span className="text-gradient">Speak</span>
           </h2>
         </ScrollFadeIn>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {stats.map((stat, i) => (
             <ScrollFadeIn key={stat.label} delay={i * 0.1}>
-              <div className="text-center p-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
-                <span className={`text-4xl md:text-5xl font-black block mb-2 ${
-                  i === 0 ? 'text-white' :
-                  i === 1 ? 'bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent' :
-                  i === 2 ? 'bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent' :
-                  'text-white'
-                }`}>
-                  {stat.value}
-                </span>
-                <span className="text-gray-400 text-xs font-semibold tracking-wider uppercase">
-                  {stat.label}
-                </span>
+              <div className="relative group glass rounded-2xl p-6 text-center hover:bg-white/[0.06] transition-all duration-500 hover:-translate-y-1 overflow-hidden">
+                <div className="shimmer absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative z-10">
+                  <p className="text-3xl sm:text-4xl font-extrabold mb-1 text-gradient">{stat.value}</p>
+                  <p className="text-[13px] font-medium" style={{ color: 'var(--text-secondary)', opacity: 0.6 }}>{stat.label}</p>
+                </div>
               </div>
             </ScrollFadeIn>
           ))}

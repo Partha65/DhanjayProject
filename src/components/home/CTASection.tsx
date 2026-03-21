@@ -1,54 +1,64 @@
 'use client';
 
-import { ctaSection } from '@/data/services';
-import { CheckCircle } from 'lucide-react';
 import ScrollFadeIn from '@/components/ui/ScrollFadeIn';
+import { ctaSection } from '@/data/services';
 import Link from 'next/link';
+import { ArrowRight, CheckCircle } from 'lucide-react';
 
 export default function CTASection() {
   return (
-    <section className="py-16 md:py-20 px-4 md:px-8">
-      <ScrollFadeIn>
-        <div className="max-w-6xl mx-auto rounded-3xl bg-gradient-to-br from-[#130d28]/90 via-[#29204b]/90 to-[#29204b]/95 border border-white/10 overflow-hidden shadow-2xl">
-          <div className="p-8 md:p-12 flex flex-col md:flex-row items-center gap-8">
-            {/* Left content */}
-            <div className="flex-1">
-              <div className="inline-flex items-center bg-cyan-400/15 px-3 py-1.5 rounded-full text-xs font-semibold text-cyan-300 mb-5 border border-cyan-400/20">
-                <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full mr-2" />
-                {ctaSection.tag}
-              </div>
+    <section className="py-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <ScrollFadeIn>
+          <div className="relative glass rounded-3xl overflow-hidden"
+            style={{ boxShadow: '0 32px 80px rgba(0,0,0,0.3), 0 0 60px rgba(var(--glow-rgb), 0.06)' }}>
 
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-2 leading-tight">
-                {ctaSection.headline}{' '}
-                <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                  {ctaSection.headlineGradient}
-                </span>
-              </h2>
+            {/* Ambient glow inside */}
+            <div className="absolute top-0 right-0 w-96 h-96 opacity-15 pointer-events-none"
+              style={{ background: 'radial-gradient(circle, var(--accent-1), transparent 70%)', filter: 'blur(80px)' }} />
+            <div className="absolute bottom-0 left-0 w-80 h-80 opacity-10 pointer-events-none"
+              style={{ background: 'radial-gradient(circle, var(--accent-2), transparent 70%)', filter: 'blur(60px)' }} />
 
-              <p className="text-gray-300 text-base leading-relaxed mt-4 mb-6">
-                {ctaSection.description}
-              </p>
+            <div className="relative z-10 p-8 sm:p-12 lg:p-16">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                {/* Left */}
+                <div>
+                  <p className="text-[12px] uppercase tracking-[0.25em] font-semibold mb-4"
+                    style={{ color: 'var(--accent-1)' }}>
+                    {ctaSection.tag}
+                  </p>
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight mb-4"
+                    style={{ color: 'var(--text-primary)' }}>
+                    {ctaSection.headline}{' '}
+                    <span className="text-gradient">{ctaSection.headlineGradient}</span>
+                  </h2>
+                  <p className="text-base leading-relaxed mb-8" style={{ color: 'var(--text-secondary)', opacity: 0.7 }}>
+                    {ctaSection.description}
+                  </p>
 
-              <Link
-                href="/contact-us"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white bg-white/10 border border-white/20 hover:bg-white/20 transition-all text-sm"
-              >
-                Get Started <span>→</span>
-              </Link>
-            </div>
-
-            {/* Right checkmarks */}
-            <div className="shrink-0 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-6 space-y-4">
-              {ctaSection.checkpoints.map((item) => (
-                <div key={item} className="flex items-center gap-3">
-                  <CheckCircle className="w-6 h-6 text-cyan-400 shrink-0" />
-                  <span className="text-white font-medium">{item}</span>
+                  <Link href="/contact-us"
+                    className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-sm font-bold text-white transition-all duration-300 hover:shadow-2xl hover:-translate-y-0.5"
+                    style={{ background: 'var(--gradient-button)', boxShadow: '0 8px 30px rgba(var(--glow-rgb), 0.3)' }}>
+                    Get Started
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
                 </div>
-              ))}
+
+                {/* Right — Checkpoints */}
+                <div className="space-y-4">
+                  {ctaSection.checkpoints.map((cp) => (
+                    <div key={cp} className="flex items-center gap-3 px-5 py-4 rounded-xl transition-all duration-300 hover:bg-white/[0.04]"
+                      style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
+                      <CheckCircle className="w-5 h-5 shrink-0" style={{ color: 'var(--accent-1)' }} />
+                      <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>{cp}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </ScrollFadeIn>
+        </ScrollFadeIn>
+      </div>
     </section>
   );
 }
