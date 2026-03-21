@@ -9,14 +9,57 @@ import { activeTheme } from "@/lib/theme";
 const jost = Jost({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Payment Gateway Balasore, Odisha | UPI & Online Payments - Vertexpay Solutions",
+  metadataBase: new URL('https://vertexpaysolutions.in'),
+  title: {
+    default: "Payment Gateway Balasore, Odisha | UPI & Online Payments - Vertexpay Solutions",
+    template: "%s | Vertexpay Solutions",
+  },
   description:
     "Vertexpay Solutions offers a secure payment gateway in Balasore, Odisha with fast UPI, card, and online payment solutions for businesses.",
+  keywords: [
+    "Payment Gateway", "UPI Payments", "Online Payments", "Balasore", "Odisha",
+    "Vertexpay Solutions", "Business Payment Solutions", "Secure Payments"
+  ],
+  authors: [{ name: "Vertexpay Solutions" }],
+  creator: "Vertexpay Solutions",
+  publisher: "Vertexpay Solutions",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
     type: "website",
+    locale: "en_IN",
+    url: "https://vertexpaysolutions.in/",
     siteName: "Vertexpay Solutions",
     title: "Payment Gateway Balasore, Odisha - Vertexpay Solutions",
     description: "Reliable UPI and online payment gateway services for businesses in Balasore, Odisha.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Vertexpay Solutions - Secure Payment Gateway",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Payment Gateway Balasore, Odisha - Vertexpay Solutions",
+    description: "Reliable UPI and online payment gateway services for businesses in Balasore, Odisha.",
+    images: ["/og-image.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 

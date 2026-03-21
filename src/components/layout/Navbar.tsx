@@ -65,9 +65,9 @@ export default function Navbar() {
                 style={{ background: 'var(--gradient-button)', boxShadow: '0 0 20px rgba(var(--glow-rgb), 0.3)' }}>
                 VP
               </div>
-              <div className="hidden sm:flex flex-col leading-none">
-                <span className="font-bold text-[15px] tracking-wide" style={{ color: 'var(--text-primary)' }}>Vertexpay</span>
-                <span className="text-[9px] tracking-[0.2em] uppercase font-medium" style={{ color: 'var(--text-muted)', opacity: 0.7 }}>Solutions</span>
+              <div className="flex flex-col justify-center">
+                <span className="font-bold text-[15px] tracking-wide leading-tight" style={{ color: 'var(--text-primary)' }}>Vertexpay</span>
+                <span className="text-[9px] tracking-[0.2em] uppercase font-medium mt-[1px]" style={{ color: 'var(--text-muted)', opacity: 0.7 }}>Solutions</span>
               </div>
             </Link>
 

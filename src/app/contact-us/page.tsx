@@ -14,13 +14,39 @@ const contactInfo = [
 export default function ContactPage() {
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => { setLoading(false); setSent(true); }, 1500);
-  };
+    
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      phone: formData.get('phone'),
+      businessName: formData.get('businessName'),
+      message: formData.get('message'),
+    };
 
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setSent(true);
+      } else {
+        alert('Failed to send message. Please try again.');
+      }
+    } catch (error) {
+      alert('An error occurred. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <PageShell>
       <PageHero tag="Contact" title="Get in" titleGradient="Touch" description="Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible." />
@@ -38,22 +64,22 @@ export default function ContactPage() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <input type="text" required placeholder="Full Name"
+                  <input type="text" name="name" required placeholder="Full Name"
                     className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all focus:ring-1"
                     style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)', color: 'var(--text-primary)', ['--tw-ring-color' as string]: 'var(--accent-1)' }} />
-                  <input type="email" required placeholder="Email Address"
+                  <input type="email" name="email" required placeholder="Email Address"
                     className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all focus:ring-1"
                     style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)', color: 'var(--text-primary)' }} />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <input type="tel" placeholder="Phone Number"
+                  <input type="tel" name="phone" placeholder="Phone Number"
                     className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all focus:ring-1"
                     style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)', color: 'var(--text-primary)' }} />
-                  <input type="text" placeholder="Business Name"
+                  <input type="text" name="businessName" placeholder="Business Name"
                     className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all focus:ring-1"
                     style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)', color: 'var(--text-primary)' }} />
                 </div>
-                <textarea required rows={5} placeholder="Your Message"
+                <textarea name="message" required rows={5} placeholder="Your Message"
                   className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all resize-none focus:ring-1"
                   style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)', color: 'var(--text-primary)' }} />
                 <button type="submit" disabled={loading}
