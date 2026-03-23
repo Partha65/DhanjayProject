@@ -162,11 +162,16 @@ export default function HeroCarousel() {
         </div>
 
         {/* Trust badges */}
-        <div className="flex flex-wrap justify-center gap-6 mt-16 pt-10" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+        <div className="flex flex-wrap justify-center gap-4 mt-16 pt-10" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
           {trustBadges.map((badge) => (
-            <div key={badge.label} className="flex items-center gap-2 text-[12px] font-medium" style={{ color: 'var(--text-muted)', opacity: 0.5 }}>
-              {badge.icon}
-              {badge.label}
+            <div key={badge.label} className="flex items-center gap-2.5 px-5 py-2.5 rounded-full transition-all duration-300 hover:bg-white/[0.06]"
+              style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
+              <span style={{ color: 'var(--accent-1)', filter: 'drop-shadow(0 0 8px rgba(var(--glow-rgb), 0.8))' }}>
+                {badge.icon}
+              </span>
+              <span className="text-[13px] font-semibold tracking-wide" style={{ color: 'var(--text-primary)' }}>
+                {badge.label}
+              </span>
             </div>
           ))}
         </div>

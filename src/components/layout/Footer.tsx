@@ -93,6 +93,17 @@ export default function Footer() {
       <div className="border-t" style={{ borderColor: 'rgba(255,255,255,0.04)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 text-center">
           <p className="text-[11px]" style={{ color: 'var(--text-muted)', opacity: 0.4 }}>{footerData.copyright}</p>
+          <p className="text-[11px] mt-1.5 flex items-center justify-center gap-1" style={{ color: 'var(--text-muted)', opacity: 0.6 }}>
+            <span>Designed & Managed by</span>
+            <a 
+              href="https://www.linkedin.com/in/parthasarathi-panda" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-gradient transition-all duration-300 hover:opacity-80 hover:-translate-y-[0.5px]"
+            >
+              Partha
+            </a>
+          </p>
         </div>
       </div>
     </footer>
